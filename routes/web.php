@@ -1,20 +1,15 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/usuarios', function () {
+Route::get('/Usuarios', function () {
     return view('usuarios');
 });
+
+Auth::routes();
+
+Route::get('home', 'HomeController@index')->name('home');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('/', 'Auth\LoginController@showLoginForm')->middleware('guest');
+
+Route::post('create', 'UsuariosController@create')->name('create');
+Route::get('/usuarios', 'UsuariosController@showForm')->name('usuarios');

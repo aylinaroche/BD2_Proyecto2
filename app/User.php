@@ -3,47 +3,34 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use Illuminate\Contracts\Auth\Authenticatable;
 #use Illuminate\Foundation\Auth\User as Authenticatable;
 
-#use Tymon\JWTAuth\Contracts\JWTSubject;
 
-#use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use Illuminate\Auth\Authenticatable;
+#use Illuminate\Contracts\Auth\MustVerifyEmail;
+#use Illuminate\Foundation\Auth\User as Authenticatable;
+#use Illuminate\Foundation\Auth\Access\Authorizable;
+#use Tymon\JWTAuth\Contracts\JWTSubject;
+#se Illuminate\Database\Eloquent\Model;
+
 #use JWTAuth;
 
-class User extends Authenticatable
+class User extends Eloquent implements Authenticatable
 {
     use Notifiable;
-    use Authenticatable;
+    use AuthenticableTrait;
 
     protected $connection = 'mongodb';
     protected $collection = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
     protected $fillable = [
-        'name', 'email', 'password',
+         'nickname', 'password', 'nombre', 'apellido', 'edad'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }

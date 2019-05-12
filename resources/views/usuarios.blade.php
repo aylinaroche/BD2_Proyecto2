@@ -36,36 +36,69 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="/Usuarios">Usuarios</a>
+                        <a class="nav-link js-scroll-trigger" href="/usuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#signup">Productos</a>
+                        <a class="nav-link js-scroll-trigger" href="/productos">Productos</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Signup Section -->
+    <!-- Agregar Section -->
     <section id="signup" class="signup-section">
         <div class="container">
+            @if(session()->has('flash'))
+            <div class="alert alert-info">{{ session('flash') }}</div>
+            @endif
             <div class="row">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
-
                     <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
                     <h2 class="text-white mb-5">Agregar Usuario</h2>
 
-                    <form class="form-inline d-flex">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="uNombre" placeholder="Nombre">
+                    <form class="form-inline d-flex" method="POST" action="create">
+                        {{ csrf_field() }}
+
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="nombre" name="nombre" placeholder="Nombre">
+                        {!! $errors->first('nombre','<span class="help-block">:message</span>') !!}
                         <HR width="80%">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="uApellido" placeholder="Apellido">
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="apellido" name="apellido" placeholder="Apellido">
+                        {!! $errors->first('apellido','<span class="help-block">:message</span>') !!}
                         <HR width="80%">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="uEdad" placeholder="Edad">
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="edad" name="edad" placeholder="Edad">
+                        {!! $errors->first('edad','<span class="help-block">:message</span>') !!}
                         <HR width="80%">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="uNickname" placeholder="Nickname">
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="nickname" name="nickname" placeholder="Nickname">
+                        {!! $errors->first('nickname','<span class="help-block">:message</span>') !!}
                         <HR width="80%">
-                        <input type="password" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="uPassword" placeholder="Password">
+                        <input type="password" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="password" name="password" placeholder="Password">
+                        {!! $errors->first('password','<span class="help-block">:message</span>') !!}
                         <HR width="80%">
+                        <input id="password-confirm" type="password" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" name="password_confirmation" placeholder="Confirmar Password">
+                        {!! $errors->first('password_confirmation','<span class="help-block">:message</span>') !!}
+                        <HR width="80%">
+
+                        <button type="submit" class="btn btn-primary mx-auto">Agregar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="signup" class="signup-section">
+        <div class="container">
+             <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto text-center">
+                    <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                    <h2 class="text-white mb-5">Usuarios</h2>
+
+                    <form class="form-inline d-flex" method="POST" action="create">
+                        {{ csrf_field() }}
+
+                        
+
                         <button type="submit" class="btn btn-primary mx-auto">Agregar</button>
                     </form>
 
